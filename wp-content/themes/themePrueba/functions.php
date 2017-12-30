@@ -26,6 +26,12 @@ function custom_meta_boxes_render($post){
     <label for="custom_meta_val">Type Something</label>
     <input type="text" name="custom_meta_val" value="<?php echo $val; ?>" />
 
+    <label for="custom_meta_select"></label>
+    <select name="custom_meta_select" id="">
+        <option value="uno">Uno</option>
+        <option value="dos">Dos</option>
+    </select>
+
 <?php
 
 } //end function custom_meta_boxes_render
@@ -50,11 +56,22 @@ function save_custom_post_meta_box($post_id, $post){
     $meta_key = 'custom_meta_val';
 
     //Get the posted data ans sanitized it
-    $new_meta_value = (isset($_POST[$meta_key]) ? sanitize_html_class($_POST[$meta_key]) : '');
+    $new_meta_value = (isset($_POST[$meta_key]) ? sanitize_text_field($_POST[$meta_key]) : '');
 
     //Get the meta value of the custom field key
     $meta_value = get_post_meta($post_id, $meta_key, true);
 
+    //If a new meta value was added and there was no previous value, add it.
+    if($new_meta_value && ''== $meta_value)
+        add_post_meta($post_id, $meta_key, $new_meta_value, true);
+    
+    //If the new meta value does not match the old value, update it. 
+    elseif( $new_meta_value && $new_meta_value != $meta_value)
+        update_post_meta($post_id, $meta_key, $new_meta_value);
+
+    //If there is no new meta value but an old value exists, delete it.
+    elseif('' == $new_meta_value && $meta_value)
+        delete_post_meta($post_id, $meta_key, $meta_value);
 
 }// end function
 
