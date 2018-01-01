@@ -1,4 +1,14 @@
 <?php 
+function incluye_scripts() {
+    wp_enqueue_script('jquery');
+    wp_enqueue_script( 'prueba-tema-handle', get_template_directory_uri().'/js/functions.js', array('jquery'), true);
+}
+
+function incluye_estilos(){
+    wp_enqueue_style('prueba-estilos-principal', get_stylesheet_uri());
+}
+add_action( 'wp_enqueue_scripts', 'incluye_scripts');
+add_action('wp_enqueue_scripts', 'incluye_estilos');
 
 //Calls the function to create the meta boxes
 add_action('add_meta_boxes', 'custom_meta_boxes');

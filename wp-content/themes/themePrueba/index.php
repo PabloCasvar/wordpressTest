@@ -1,7 +1,7 @@
 <?php
 get_header();
-?>
 
+?>
 <?php
 //Loop test
 if ( have_posts() ):

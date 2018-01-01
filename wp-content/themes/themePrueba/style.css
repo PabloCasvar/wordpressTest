@@ -11,3 +11,12 @@ Text Domain: DominioTemaPrueba
 This theme, like WordPress, is licensed under the GPL.
 Use it to make something cool, have fun, and share what you've learned with others.
 */
+
+h1{
+    color: blue;
+    background-color: rgb(13, 133, 173);
+}
+
+h2{
+    background-color: lightblue;
+}
