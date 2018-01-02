@@ -7,4 +7,4 @@
     <title>Titulo Template Prueba</title>
     <?php wp_head(); ?>
 </head>
-<body onload="muestra_alerta();" <?php body_class(); ?>>
+<body <?php body_class(); ?>>
